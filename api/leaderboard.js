@@ -1,4 +1,4 @@
-import { redis } from '../lib/db';
+import { redis } from '../lib/db.js';
 
 // Map the frontend's weapon label to the DB field name
 function weaponDataKey(weapon) {
