@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EclipseTiers · Minecraft PvP Rankings</title>
-<meta name="description" content="EclipseTiers is a global Minecraft PvP tier list community. Live leaderboards, player tiers and rankings for Sword, Axe, Pot, SMP, UHC, NethPot, SpearMace, Cart and more.">
+<title>Quantum Tierlist · Minecraft PvP Rankings</title>
+<meta name="description" content="Quantum Tierlist is a global Minecraft PvP tier list community. Live leaderboards, player tiers and rankings for Sword, Axe, Pot, SMP, UHC, NethPot, SpearMace, Cart and more.">
 <meta name="theme-color" content="#00C864">
 <link rel="icon" type="image/png" sizes="512x512" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -33,7 +33,7 @@
   .pt-topbar{position:sticky;top:0;z-index:150;background:linear-gradient(180deg,rgba(15,18,25,.96),rgba(15,18,25,.86));backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 8px 28px rgba(0,0,0,.22);}
   .pt-topbar-inner{max-width:1360px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;}
   .pt-brand{display:inline-flex;align-items:center;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:1.55rem;font-weight:900;letter-spacing:.5px;}
-  .pt-brand-eclipse{color:#00C864;}
+  .pt-brand-quantum{color:#00C864;}
   .pt-brand-tiers{color:#a9b2bf;}
   .pt-nav{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow-x:auto;}
   .pt-nav-link{text-decoration:none;color:rgba(238,242,247,.72);font-family:'Rajdhani',sans-serif;font-size:.98rem;font-weight:700;padding:9px 13px;border-radius:999px;border:1px solid transparent;white-space:nowrap;transition:background .2s,color .2s,border-color .2s;}
@@ -383,7 +383,7 @@
 <header class="pt-topbar">
   <div class="pt-topbar-inner">
     <a class="pt-brand" href="/home" onclick="return goToView(event,'home')">
-      <span class="pt-brand-eclipse">Eclipse</span><span class="pt-brand-tiers">Tiers</span>
+      <span class="pt-brand-quantum">Quantum</span><span class="pt-brand-tiers">Tiers</span>
     </a>
     <nav class="pt-nav">
       <a class="pt-nav-link active" href="/home" onclick="return goToView(event,'home')">Home</a>
@@ -567,10 +567,10 @@
         </div>
         <div>
           <h2>TierTagger</h2>
-          <p>Client mod that shows EclipseTiers PvP tiers directly in player nametags.</p>
+          <p>Client mod that shows Quantum Tierlist PvP tiers directly in player nametags.</p>
         </div>
       </div>
-      <a class="tiertagger-download" href="EclipseTiers-TierTagger-1.3.0.jar" download>Download TierTagger</a>
+      <a class="tiertagger-download" href="Quantum Tierlist-TierTagger-1.3.0.jar" download>Download TierTagger</a>
     </div>
     <div class="tiertagger-grid">
       <div class="tiertagger-stat"><div class="label">Live Downloads</div><div class="value" id="tierTaggerDownloadsValue">Loading...</div></div>
@@ -578,8 +578,8 @@
       <div class="tiertagger-stat"><div class="label">Version</div><div class="value">1.3.0</div></div>
     </div>
     <div class="tiertagger-readme">
-      <h3># Eclipse TierTagger</h3>
-      <p><strong>Eclipse TierTagger</strong> is a client-side Fabric mod that displays PvP tier rankings from EclipseTiers directly on player nametags.</p>
+      <h3># Quantum TierTagger</h3>
+      <p><strong>Quantum TierTagger</strong> is a client-side Fabric mod that displays PvP tier rankings from Quantum Tierlist directly on player nametags.</p>
       <h4>Features</h4>
       <ul>
         <li>🏷️ <strong>Live tier tags</strong> — See every player's PvP tier in real time</li>
@@ -622,7 +622,7 @@
 <footer class="pt-footer">
   <div class="pt-footer-inner">
     <div class="pt-footer-brand">
-      <span class="pt-footer-logo">EclipseTiers</span>
+      <span class="pt-footer-logo">Quantum Tierlist</span>
       <p>A global Minecraft PvP tier list community. Get tested, get ranked, get respected.</p>
     </div>
     <div class="pt-footer-links">
@@ -641,7 +641,7 @@
     </div>
   </div>
   <div class="pt-footer-bottom">
-    <span>© <span id="footerYear">2026</span> EclipseTiers. All rights reserved.</span>
+    <span>© <span id="footerYear">2026</span> Quantum Tierlist. All rights reserved.</span>
     <span>Built by the community, for the community.</span>
   </div>
 </footer>
@@ -1306,7 +1306,7 @@ function connectRealtime() {
   }
   try {
     const pusher = new Pusher(PUSHER_KEY, { cluster: PUSHER_CLUSTER });
-    const channel = pusher.subscribe('eclipsetiers-updates');
+    const channel = pusher.subscribe('Quantumtiers-updates');
 
     channel.bind('tier_updated', msg => {
       fetchLeaderboard(currentWeapon);
