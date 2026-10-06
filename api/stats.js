@@ -1,4 +1,4 @@
-import { redis } from '../lib/db';
+import { redis } from '../lib/db.js';
 
 export default async function handler(req, res) {
   // CORS (in case frontend and API end up on different origins)
