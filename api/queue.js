@@ -1,4 +1,4 @@
-import { redis } from '../lib/db';
+import { redis } from '../lib/db.js';
 
 const WEAPONS = [
   'Sword','Axe','Mace','Crystal','Netherite','UHC',
