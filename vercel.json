@@ -1,10 +1,17 @@
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/home", "destination": "/home.html" },
     { "source": "/rankings", "destination": "/rankings.html" },
     { "source": "/testers", "destination": "/testers.html" },
     { "source": "/tiertagger", "destination": "/tiertagger.html" },
     { "source": "/compare", "destination": "/compare.html" },
+    { "source": "/:slug/home", "destination": "/home.html" },
+    { "source": "/:slug/rankings", "destination": "/rankings.html" },
+    { "source": "/:slug/testers", "destination": "/testers.html" },
+    { "source": "/:slug/tiertagger", "destination": "/tiertagger.html" },
+    { "source": "/:slug/compare", "destination": "/compare.html" },
+    { "source": "/:slug", "destination": "/home.html" },
     { "source": "/", "destination": "/home.html" }
   ]
 }
