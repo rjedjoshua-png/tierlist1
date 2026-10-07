@@ -29,6 +29,7 @@ export default async function handler(req, res) {
             slug: raw.slug || null,
             name: raw.name || null,
             avatar_url: raw.avatar_url || null,
+            discord_invite: raw.discord_invite || null,
           };
         })
         .filter((t) => t && t.slug);
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
       guild_id: tenant.guild_id || null,
       name: tenant.name || 'Quantum Tierlist',
       avatar_url: tenant.avatar_url || null,
+      discord_invite: tenant.discord_invite || null,
     });
   } catch (err) {
     console.error('site-config error:', err);
