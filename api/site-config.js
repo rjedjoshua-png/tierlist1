@@ -24,11 +24,21 @@ export default async function handler(req, res) {
       const tenants = results
         .map((raw) => {
           if (!raw || Object.keys(raw).length === 0) return null;
+
+          const rawSlug = raw.slug;
+          const cleanSlug = rawSlug != null ? String(rawSlug).trim().toLowerCase() : '';
+          if (!cleanSlug || !/^[a-z0-9][a-z0-9-]{1,30}[a-z0-9]$/.test(cleanSlug)) {
+            return null;
+          }
+
+          const rawName = raw.name;
+          const cleanName = rawName != null ? String(rawName) : cleanSlug;
+
           return {
-            slug: raw.slug || null,
-            name: raw.name || null,
-            avatar_url: raw.avatar_url || null,
-            discord_invite: raw.discord_invite || null,
+            slug: cleanSlug,
+            name: cleanName,
+            avatar_url: raw.avatar_url ? String(raw.avatar_url) : null,
+            discord_invite: raw.discord_invite ? String(raw.discord_invite) : null,
           };
         })
         .filter((t) => t && t.slug);
@@ -43,11 +53,11 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({
-      slug: tenant.slug || slug,
-      guild_id: tenant.guild_id || null,
-      name: tenant.name || 'Quantum Tierlist',
-      avatar_url: tenant.avatar_url || null,
-      discord_invite: tenant.discord_invite || null,
+      slug: tenant.slug ? String(tenant.slug) : slug,
+      guild_id: tenant.guild_id ? String(tenant.guild_id) : null,
+      name: tenant.name ? String(tenant.name) : 'Quantum Tierlist',
+      avatar_url: tenant.avatar_url ? String(tenant.avatar_url) : null,
+      discord_invite: tenant.discord_invite ? String(tenant.discord_invite) : null,
     });
   } catch (err) {
     console.error('site-config error:', err);
