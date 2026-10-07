@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum Tierlist · Minecraft PvP Rankings</title>
-<meta name="description" content="Quantum Tierlist is a global Minecraft PvP tier list community. Live leaderboards, player tiers and rankings for Sword, Axe, Pot, SMP, UHC, NethPot, SpearMace, Cart and more.">
+<title>Quantum Tierlist</title>
+<meta name="description" content="A global Minecraft PvP tier list community. Live leaderboards, player tiers and rankings for Sword, Axe, Pot, SMP, UHC, NethPot, SpearMace, Cart and more.">
 <meta name="theme-color" content="#00C864">
-<link rel="icon" type="image/png" sizes="512x512" href="logo.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 <script src="https://js.pusher.com/8.0/pusher.min.js"></script>
@@ -26,12 +26,14 @@
   }
   @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:url('logo.png') center/cover fixed no-repeat,#0f0705;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;}
+  body{background:#0f0705;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;}
   .container{max-width:1360px;margin:0 auto;padding:0 28px 48px;position:relative;z-index:1;}
 
   .pt-topbar{position:sticky;top:0;z-index:150;background:linear-gradient(180deg,rgba(15,18,25,.96),rgba(15,18,25,.86));backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 8px 28px rgba(0,0,0,.22);}
   .pt-topbar-inner{max-width:1360px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;}
-  .pt-brand{display:inline-flex;align-items:center;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:1.55rem;font-weight:900;letter-spacing:.5px;}
+  .pt-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'Orbitron',sans-serif;font-size:1.55rem;font-weight:900;letter-spacing:.5px;}
+  .pt-brand-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;display:none;background:#111;}
+  .pt-brand-logo.show{display:block;}
   .pt-brand-eclipse{color:#00C864;}
   .pt-brand-tiers{color:#a9b2bf;}
   .pt-nav{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow-x:auto;}
@@ -309,34 +311,7 @@
   .pt-footer-col a{color:var(--muted);text-decoration:none;font-size:.92rem;}
   .pt-footer-bottom{max-width:1180px;margin:0 auto;border-top:1px solid var(--border-soft);padding:20px 0 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--dim);}
 
-  body.view-home .gamemode-tabs,
-  body.view-home #gmDetailPane,
-  body.view-home #leaderboardPane,
-  body.view-home #testersSection,
-  body.view-home .tiertagger-section,
-  body.view-home .compare-section{display:none!important;}
-  body.view-testers .gamemode-tabs,
-  body.view-testers #gmDetailPane,
-  body.view-testers #leaderboardPane,
-  body.view-testers #homeSection,
-  body.view-testers .tiertagger-section,
-  body.view-testers .compare-section{display:none!important;}
-  body.view-rankings #homeSection,
-  body.view-rankings #testersSection,
-  body.view-rankings .tiertagger-section,
-  body.view-rankings .compare-section{display:none!important;}
-  body.view-tiertagger #homeSection,
-  body.view-tiertagger #testersSection,
-  body.view-tiertagger #leaderboardPane,
-  body.view-tiertagger #gmDetailPane,
-  body.view-tiertagger .gamemode-tabs,
-  body.view-tiertagger .compare-section{display:none!important;}
-  body.view-compare #homeSection,
-  body.view-compare #testersSection,
-  body.view-compare #leaderboardPane,
-  body.view-compare #gmDetailPane,
-  body.view-compare .gamemode-tabs,
-  body.view-compare .tiertagger-section{display:none!important;}
+  .hidden{display:none!important;}
 
   @media(max-width:1100px){
     .pt-topbar-inner{flex-wrap:wrap;}
@@ -366,16 +341,17 @@
 
 <header class="pt-topbar">
   <div class="pt-topbar-inner">
-    <a class="pt-brand" href="/home" onclick="return goToView(event,'home')">
-      <span class="pt-brand-eclipse">Quantum</span><span class="pt-brand-tiers"> Tierlist</span>
+    <a class="pt-brand" href="#" id="brandLink">
+      <img class="pt-brand-logo" id="brandLogo" alt="Logo">
+      <span class="pt-brand-eclipse" id="brandNameA">Quantum</span><span class="pt-brand-tiers" id="brandNameB"> Tierlist</span>
     </a>
     <nav class="pt-nav">
-      <a class="pt-nav-link active" href="/home" onclick="return goToView(event,'home')">Home</a>
-      <a class="pt-nav-link" href="/testers" onclick="return goToView(event,'testers')">Testers</a>
-      <a class="pt-nav-link" href="/rankings" onclick="return goToView(event,'rankings')">Rankings</a>
-      <a class="pt-nav-link" href="/compare" onclick="return goToView(event,'compare')">Compare</a>
+      <a class="pt-nav-link active" href="#" id="nav-home">Home</a>
+      <a class="pt-nav-link" href="#" id="nav-testers">Testers</a>
+      <a class="pt-nav-link" href="#" id="nav-rankings">Rankings</a>
+      <a class="pt-nav-link" href="#" id="nav-compare">Compare</a>
       <a class="pt-nav-link" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Discord</a>
-      <a class="pt-nav-link" href="/tiertagger" onclick="return goToView(event,'tiertagger')">TierTagger</a>
+      <a class="pt-nav-link" href="#" id="nav-tiertagger">TierTagger</a>
     </nav>
     <div class="pt-actions">
       <div class="pt-search-wrap">
@@ -425,7 +401,7 @@
         <h1 class="hero-title">The <span>#1 Cracked</span><br>&amp; Premium Tierlist</h1>
         <p class="hero-sub">Compete in ranked 1v1s. Get tested by top players.<br>Claim your spot on the global leaderboard.</p>
         <div class="hero-actions">
-          <a class="hero-btn hero-btn-primary" href="/rankings" onclick="return goToView(event,'rankings')">View Rankings</a>
+          <a class="hero-btn hero-btn-primary" href="#" id="heroRankingsBtn">View Rankings</a>
           <a class="hero-btn hero-btn-secondary" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Join Discord</a>
         </div>
         <div class="hero-stats">
@@ -443,7 +419,7 @@
     </div>
   </section>
 
-  <section class="pt-search-section" id="searchSection">
+  <section class="pt-search-section">
     <span class="pt-search-eyebrow">Look Yourself Up</span>
     <h2>Search Tiers &amp; Rankings</h2>
     <p class="pt-search-sub">Type any Minecraft IGN to jump straight to their tier on the leaderboard.</p>
@@ -454,13 +430,13 @@
     </div>
   </section>
 
-  <section class="pt-top3-section" id="top3Section">
+  <section class="pt-top3-section">
     <span class="pt-section-eyebrow">Leaderboard</span>
     <h2>Top 3 Players</h2>
     <div class="pt-top3-row" id="top3Row">
       <div class="pt-strip-empty">Loading top players...</div>
     </div>
-    <a class="pt-section-link" href="/rankings" onclick="return goToView(event,'rankings')">View Full Rankings →</a>
+    <a class="pt-section-link" href="#" id="top3Link">View Full Rankings →</a>
   </section>
 
   <section class="pt-testers-preview">
@@ -469,7 +445,7 @@
     <div class="pt-testers-row" id="testersPreviewRow">
       <div class="pt-strip-empty">Loading testers...</div>
     </div>
-    <a class="pt-section-link" href="/testers" onclick="return goToView(event,'testers')">See All Testers →</a>
+    <a class="pt-section-link" href="#" id="testersLink">See All Testers →</a>
   </section>
 
   <section class="home-discord-section">
@@ -485,13 +461,13 @@
     </div>
   </section>
 
-  <section class="testers-section" id="testersSection">
+  <section class="testers-section hidden" id="testersSection">
     <div class="testers-grid" id="testersGrid">
       <div class="testers-empty">Loading testers...</div>
     </div>
   </section>
 
-  <div class="gamemode-tabs" id="gamemodeTabs">
+  <div class="gamemode-tabs hidden" id="gamemodeTabs">
     <button class="weapon-btn active" onclick="filterWeapon('all', this)"><span class="gm-icon trophy-emoji">🏆</span><span>Overall</span></button>
     <button class="weapon-btn" onclick="filterWeapon('Sword', this)"><span class="gm-icon"><img class="gm-btn-img" src="https://i.postimg.cc/kRMTQHty/sword.png" alt="Sword"></span><span>Sword</span></button>
     <button class="weapon-btn" onclick="filterWeapon('Axe', this)"><span class="gm-icon"><img class="gm-btn-img" src="https://i.postimg.cc/9wXLdkqY/axe.png" alt="Axe"></span><span>Axe</span></button>
@@ -506,7 +482,7 @@
     <button class="weapon-btn" onclick="filterWeapon('Cart', this)"><span class="gm-icon"><img class="gm-btn-img" src="https://i.postimg.cc/VrW7bw5D/cart.png" alt="Cart"></span><span>Cart</span></button>
   </div>
 
-  <div class="gm-detail-pane" id="gmDetailPane" style="display:none;">
+  <div class="gm-detail-pane hidden" id="gmDetailPane">
     <div class="gm-detail-head">
       <div>
         <div class="gm-detail-title" id="gmDetailTitle">Crystal</div>
@@ -517,7 +493,7 @@
     <div class="gm-tier-grid" id="gmTierGrid"></div>
   </div>
 
-  <div id="leaderboardPane">
+  <div id="leaderboardPane" class="hidden">
     <div class="stats-row" id="statsRow">
       <div class="stat-card"><div class="stat-num skeleton" style="width:60px;height:32px"></div><div class="stat-label" style="margin-top:10px">Registrations</div></div>
       <div class="stat-card"><div class="stat-num skeleton" style="width:60px;height:32px"></div><div class="stat-label" style="margin-top:10px">Tiered</div></div>
@@ -540,7 +516,7 @@
     </div>
   </div>
 
-  <section class="tiertagger-section" id="tiertaggerSection">
+  <section class="tiertagger-section hidden" id="tiertaggerSection">
     <div class="tiertagger-head">
       <div class="tiertagger-title">
         <div class="tiertagger-badge">
@@ -554,7 +530,7 @@
           <p>Client mod that shows Quantum Tierlist PvP tiers directly in player nametags.</p>
         </div>
       </div>
-      <a class="tiertagger-download" href="EclipseTiers-TierTagger-1.3.0.jar" download>Download TierTagger</a>
+      <a class="tiertagger-download" href="/EclipseTiers-TierTagger-1.3.0.jar" download>Download TierTagger</a>
     </div>
     <div class="tiertagger-grid">
       <div class="tiertagger-stat"><div class="label">Live Downloads</div><div class="value" id="tierTaggerDownloadsValue">Loading...</div></div>
@@ -582,8 +558,8 @@
     </div>
   </section>
 
-  <section class="compare-section" id="compareSection">
-    <div class="ranks-head" style="text-align:center;margin-bottom:24px;">
+  <section class="compare-section hidden" id="compareSection">
+    <div style="text-align:center;margin-bottom:24px;">
       <h2 style="font-family:'Orbitron',sans-serif;">Compare Players</h2>
       <p style="color:var(--muted);margin-top:10px;">Pick any two players to compare their ranking, points, and per-weapon tiers.</p>
     </div>
@@ -606,26 +582,26 @@
 <footer class="pt-footer">
   <div class="pt-footer-inner">
     <div class="pt-footer-brand">
-      <span class="pt-footer-logo">Quantum Tierlist</span>
+      <span class="pt-footer-logo" id="footerName">Quantum Tierlist</span>
       <p>A global Minecraft PvP tier list community. Get tested, get ranked, get respected.</p>
     </div>
     <div class="pt-footer-links">
       <div class="pt-footer-col">
         <span class="pt-footer-col-title">Explore</span>
-        <a href="/home" onclick="return goToView(event,'home')">Home</a>
-        <a href="/rankings" onclick="return goToView(event,'rankings')">Rankings</a>
-        <a href="/compare" onclick="return goToView(event,'compare')">Compare</a>
-        <a href="/testers" onclick="return goToView(event,'testers')">Testers</a>
+        <a href="#" id="foot-home">Home</a>
+        <a href="#" id="foot-rankings">Rankings</a>
+        <a href="#" id="foot-compare">Compare</a>
+        <a href="#" id="foot-testers">Testers</a>
       </div>
       <div class="pt-footer-col">
         <span class="pt-footer-col-title">Resources</span>
-        <a href="/tiertagger" onclick="return goToView(event,'tiertagger')">TierTagger</a>
+        <a href="#" id="foot-tiertagger">TierTagger</a>
         <a href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Discord Server</a>
       </div>
     </div>
   </div>
   <div class="pt-footer-bottom">
-    <span>© <span id="footerYear">2026</span> Quantum Tierlist. All rights reserved.</span>
+    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">Quantum Tierlist</span>. All rights reserved.</span>
     <span>Built by the community, for the community.</span>
   </div>
 </footer>
@@ -640,14 +616,37 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════════════════
 const API = window.location.origin;
 const PUSHER_KEY = 'YOUR_PUSHER_KEY';
 const PUSHER_CLUSTER = 'YOUR_PUSHER_CLUSTER';
 
+// Detect slug from URL path
+function detectSlug() {
+  const path = location.pathname.replace(/^\/+|\/+$/g, '');
+  // If the path is a known page name, there's no slug
+  const knownPages = ['home', 'rankings', 'testers', 'compare', 'tiertagger', ''];
+  if (knownPages.includes(path)) {
+    // fall back to query param ?slug=
+    return new URLSearchParams(location.search).get('slug') || null;
+  }
+  // Otherwise, the first path segment is the slug
+  const parts = path.split('/');
+  return parts[0] || null;
+}
+
+const SLUG = detectSlug();
+
+// ═══════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════
 let currentWeapon = 'all';
 let cachedPlayers = [];
 let lbSearchQuery = '';
 let lbSearchDebounceTimer = null;
+let siteConfig = { name: 'Quantum Tierlist', avatar_url: null, slug: null };
 
 const TIER_COLOR = {
   HT1:'#FF6B00',LT1:'#FF9933',HT2:'#FFB800',LT2:'#FFD700',
@@ -679,6 +678,9 @@ const RANK_TITLE_ICONS = {
   'Combat Specialist':'💎','Combat Cadet':'🛡️','Combat Novice':'⭐','Rookie':'•'
 };
 
+// ═══════════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════════
 function weaponDataKey(w) {
   if (!w || w === 'all') return 'all';
   if (w === 'Diasmp') return 'DiaSMP';
@@ -715,26 +717,100 @@ function regionBadgeHTML(region) {
   return `<div class="region-badge${flag ? '' : ' muted'}">${flag || ''} ${pretty}</div>`;
 }
 
-async function apiFetch(endpoint) {
-  const r = await fetch(API + endpoint);
+function withSlug(path) {
+  if (!SLUG) return path + (path.includes('?') ? '&' : '?') + 'slug=';
+  return path + (path.includes('?') ? '&' : '?') + 'slug=' + encodeURIComponent(SLUG);
+}
+
+async function apiFetch(endpoint, extraParams = '') {
+  const params = SLUG ? `slug=${encodeURIComponent(SLUG)}` : '';
+  const separator = endpoint.includes('?') ? '&' : '?';
+  const url = API + endpoint + (params ? separator + params + (extraParams ? '&' + extraParams : '') : (extraParams ? separator + extraParams : ''));
+  const r = await fetch(url);
   if (!r.ok) throw new Error(r.statusText);
   return r.json();
 }
 
-const VIEW_PATHS = { home:'/home', testers:'/testers', rankings:'/rankings', tiertagger:'/tiertagger', compare:'/compare' };
+// ═══════════════════════════════════════════════════════════════
+//  SITE CONFIG (name + logo per tenant)
+// ═══════════════════════════════════════════════════════════════
+async function loadSiteConfig() {
+  if (!SLUG) {
+    // No slug → generic site
+    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null });
+    return;
+  }
+  try {
+    const cfg = await apiFetch('/api/site-config');
+    siteConfig = cfg;
+    applySiteConfig(cfg);
+  } catch (err) {
+    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null });
+  }
+}
+
+function applySiteConfig(cfg) {
+  const name = cfg.name || 'Quantum Tierlist';
+  const avatar = cfg.avatar_url;
+
+  // Topbar brand text
+  const words = name.split(' ');
+  const firstWord = words[0] || 'Quantum';
+  const restWords = words.slice(1).join(' ') || 'Tierlist';
+  document.getElementById('brandNameA').textContent = firstWord;
+  document.getElementById('brandNameB').textContent = restWords ? ' ' + restWords : '';
+
+  // Logo
+  const logoEl = document.getElementById('brandLogo');
+  if (avatar) {
+    logoEl.src = avatar;
+    logoEl.classList.add('show');
+  } else {
+    logoEl.classList.remove('show');
+  }
+
+  // Footer
+  document.getElementById('footerName').textContent = name;
+  document.getElementById('footerBrandName').textContent = name;
+
+  // Title
+  document.title = name;
+
+  // Hero
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) heroTitle.textContent = name;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  NAVIGATION (path-based routing with slug prefix)
+// ═══════════════════════════════════════════════════════════════
+function viewPath(view) {
+  const slugPrefix = SLUG ? `/${SLUG}` : '';
+  const mapping = {
+    home: slugPrefix || '/',
+    testers: `${slugPrefix}/testers`,
+    rankings: `${slugPrefix}/rankings`,
+    tiertagger: `${slugPrefix}/tiertagger`,
+    compare: `${slugPrefix}/compare`,
+  };
+  return mapping[view] || (slugPrefix || '/');
+}
 
 function getCurrentView() {
   const path = location.pathname.replace(/\/+$/, '') || '/';
-  if (path === '/testers') return 'testers';
-  if (path === '/tiertagger') return 'tiertagger';
-  if (path === '/rankings') return 'rankings';
-  if (path === '/compare') return 'compare';
+  const parts = path.split('/').filter(Boolean);
+  // If slug is set, the first part is the slug — view is the second part
+  const viewPart = SLUG ? parts[1] : parts[0];
+  if (viewPart === 'testers') return 'testers';
+  if (viewPart === 'tiertagger') return 'tiertagger';
+  if (viewPart === 'rankings') return 'rankings';
+  if (viewPart === 'compare') return 'compare';
   return 'home';
 }
 
 function goToView(evt, view) {
   if (evt) evt.preventDefault();
-  const target = VIEW_PATHS[view] || '/home';
+  const target = viewPath(view);
   if (location.pathname !== target) history.pushState({ view }, '', target);
   applyView();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -743,26 +819,75 @@ function goToView(evt, view) {
 
 function applyView() {
   const view = getCurrentView();
-  document.body.classList.remove('view-home','view-testers','view-rankings','view-tiertagger','view-compare');
-  document.body.classList.add('view-' + view);
+
+  const home = document.getElementById('homeSection');
+  const testers = document.getElementById('testersSection');
+  const tiertagger = document.getElementById('tiertaggerSection');
+  const compare = document.getElementById('compareSection');
+  const tabs = document.getElementById('gamemodeTabs');
+  const gmPane = document.getElementById('gmDetailPane');
+  const lbPane = document.getElementById('leaderboardPane');
+
+  if (home) home.classList.add('hidden');
+  if (testers) testers.classList.add('hidden');
+  if (tiertagger) tiertagger.classList.add('hidden');
+  if (compare) compare.classList.add('hidden');
+  if (tabs) tabs.classList.add('hidden');
+  if (gmPane) gmPane.classList.add('hidden');
+  if (lbPane) lbPane.classList.add('hidden');
+
+  if (view === 'home') {
+    if (home) home.classList.remove('hidden');
+  } else if (view === 'testers') {
+    if (testers) testers.classList.remove('hidden');
+    fetchTesters();
+  } else if (view === 'tiertagger') {
+    if (tiertagger) tiertagger.classList.remove('hidden');
+  } else if (view === 'compare') {
+    if (compare) compare.classList.remove('hidden');
+  } else if (view === 'rankings') {
+    if (tabs) tabs.classList.remove('hidden');
+    if (lbPane) lbPane.classList.remove('hidden');
+    fetchLeaderboard(currentWeapon);
+  }
 
   document.querySelectorAll('.pt-nav-link').forEach(a => {
     const href = a.getAttribute('href') || '';
-    a.classList.toggle('active', href === VIEW_PATHS[view]);
+    a.classList.toggle('active', href === viewPath(view));
   });
+}
 
-  if (view === 'testers') fetchTesters();
-  if (view === 'rankings') fetchLeaderboard(currentWeapon);
+function wireNav() {
+  document.getElementById('nav-home').addEventListener('click', e => goToView(e, 'home'));
+  document.getElementById('nav-testers').addEventListener('click', e => goToView(e, 'testers'));
+  document.getElementById('nav-rankings').addEventListener('click', e => goToView(e, 'rankings'));
+  document.getElementById('nav-compare').addEventListener('click', e => goToView(e, 'compare'));
+  document.getElementById('nav-tiertagger').addEventListener('click', e => goToView(e, 'tiertagger'));
+  document.getElementById('brandLink').addEventListener('click', e => goToView(e, 'home'));
+  document.getElementById('top3Link').addEventListener('click', e => goToView(e, 'rankings'));
+  document.getElementById('testersLink').addEventListener('click', e => goToView(e, 'testers'));
+  document.getElementById('heroRankingsBtn').addEventListener('click', e => goToView(e, 'rankings'));
+  document.getElementById('foot-home').addEventListener('click', e => goToView(e, 'home'));
+  document.getElementById('foot-rankings').addEventListener('click', e => goToView(e, 'rankings'));
+  document.getElementById('foot-compare').addEventListener('click', e => goToView(e, 'compare'));
+  document.getElementById('foot-testers').addEventListener('click', e => goToView(e, 'testers'));
+  document.getElementById('foot-tiertagger').addEventListener('click', e => goToView(e, 'tiertagger'));
 }
 
 window.addEventListener('popstate', applyView);
-window.addEventListener('DOMContentLoaded', applyView);
+window.addEventListener('DOMContentLoaded', () => {
+  wireNav();
+  applyView();
+});
 
+// ═══════════════════════════════════════════════════════════════
+//  HOME GAMEMODES
+// ═══════════════════════════════════════════════════════════════
 function renderHomeGamemodes() {
   const host = document.getElementById('heroGamemodes');
   if (!host) return;
   host.innerHTML = HOME_GAMEMODES.map(({ label, weapon, icon }) => `
-    <a class="hero-mode-card${weapon === 'all' ? ' is-overall' : ''}" href="/rankings" onclick="return pickWeapon(event,'${weapon}')">
+    <a class="hero-mode-card${weapon === 'all' ? ' is-overall' : ''}" href="${viewPath('rankings')}" onclick="return pickWeapon(event,'${weapon}')">
       <span class="hero-mode-icon-wrap">${icon}</span>
       <span>${label}</span>
     </a>
@@ -776,6 +901,9 @@ function pickWeapon(evt, weapon) {
   filterWeapon(weapon);
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  STATS
+// ═══════════════════════════════════════════════════════════════
 async function fetchStats() {
   try {
     const d = await apiFetch('/api/stats');
@@ -788,11 +916,14 @@ function renderStats(d) {
   const tieredPlayers = d.tieredPlayers ?? '--';
   const queuedNow = d.queuedNow ?? '--';
 
-  document.getElementById('statsRow').innerHTML = `
-    <div class="stat-card"><div class="stat-num">${totalPlayers}</div><div class="stat-label">Registrations</div></div>
-    <div class="stat-card"><div class="stat-num">${tieredPlayers}</div><div class="stat-label">Tiered</div></div>
-    <div class="stat-card"><div class="stat-num">${queuedNow}</div><div class="stat-label">In Queue</div></div>
-  `;
+  const sr = document.getElementById('statsRow');
+  if (sr) {
+    sr.innerHTML = `
+      <div class="stat-card"><div class="stat-num">${totalPlayers}</div><div class="stat-label">Registrations</div></div>
+      <div class="stat-card"><div class="stat-num">${tieredPlayers}</div><div class="stat-label">Tiered</div></div>
+      <div class="stat-card"><div class="stat-num">${queuedNow}</div><div class="stat-label">In Queue</div></div>
+    `;
+  }
   const hp = document.getElementById('heroPlayersRanked');
   const ht = document.getElementById('heroTieredPlayers');
   const hq = document.getElementById('heroQueuedNow');
@@ -804,15 +935,19 @@ function renderStats(d) {
   if (dl) dl.textContent = 'Not tracked';
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  LEADERBOARD
+// ═══════════════════════════════════════════════════════════════
 async function fetchLeaderboard(weapon = 'all') {
   try {
-    const d = await apiFetch(`/api/leaderboard?weapon=${weaponDataKey(weapon)}`);
+    const d = await apiFetch('/api/leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
     cachedPlayers = (d.players || []).map((p, i) => ({ ...p, rank: i + 1 }));
     renderLeaderboard(cachedPlayers);
     renderGamemodeView(currentWeapon, cachedPlayers);
     renderTop3();
   } catch(_) {
-    document.getElementById('lbBody').innerHTML = `<tr><td colspan="4" class="lb-cell"><div class="empty-state">API unavailable.</div></td></tr>`;
+    const lb = document.getElementById('lbBody');
+    if (lb) lb.innerHTML = `<tr><td colspan="4" class="lb-cell"><div class="empty-state">API unavailable.</div></td></tr>`;
   }
 }
 
@@ -838,8 +973,7 @@ function renderLeaderboard(players, highlightIgn = null) {
     const rankText = rankTitleHTML(p?.rankTitle);
     const totalPts = p?.totalPts ?? 0;
     return `
-      <tr class="lb-row${highlightIgn && p?.ign && p.ign.toLowerCase() === highlightIgn.toLowerCase() ? ' highlight' : ''}"
-          onclick="openPlayerModal('${payload}')">
+      <tr class="lb-row" onclick="openPlayerModal('${payload}')">
         <td class="lb-cell rank-cell"><div class="rank-badge ${rankClass || 'neutral'}">${rankNo}</div></td>
         <td class="lb-cell player-cell-wrap">
           <div class="player-cell">
@@ -884,13 +1018,13 @@ function filterWeapon(weapon) {
   const gmPane = document.getElementById('gmDetailPane');
 
   if (weapon === 'all') {
-    if (gmPane) gmPane.style.display = 'none';
+    if (gmPane) gmPane.classList.add('hidden');
     if (tableWrap) tableWrap.classList.remove('hidden');
     fetchLeaderboard('all');
     return;
   }
   if (tableWrap) tableWrap.classList.add('hidden');
-  if (gmPane) gmPane.style.display = '';
+  if (gmPane) gmPane.classList.remove('hidden');
   renderGamemodeView(weapon, cachedPlayers);
   fetchLeaderboard(weapon);
 }
@@ -902,8 +1036,8 @@ function renderGamemodeView(mode, players = []) {
   const sub = document.getElementById('gmDetailSub');
   const pill = document.getElementById('gmDetailPill');
   if (!pane || !grid) return;
-  if (!mode || mode === 'all') { pane.style.display = 'none'; return; }
-  pane.style.display = '';
+  if (!mode || mode === 'all') { pane.classList.add('hidden'); return; }
+  pane.classList.remove('hidden');
 
   const modeLabel = weaponDisplayName(mode);
   const filteredPlayers = lbSearchQuery
@@ -948,7 +1082,7 @@ function renderTop3() {
     const ign = p.ign || 'Unknown';
     const avatar = `https://mc-heads.net/avatar/${encodeURIComponent(skinIGN(p))}/56`;
     return `
-      <a class="pt-top3-chip" href="/rankings" onclick="return goToView(event,'rankings')">
+      <a class="pt-top3-chip" href="${viewPath('rankings')}" onclick="return goToView(event,'rankings')">
         <span class="pt-top3-rank ${medals[i]}">#${i + 1}</span>
         <img class="pt-top3-avatar" src="${avatar}" alt="${ign}" onerror="this.src='https://mc-heads.net/avatar/steve/56'">
         <span class="pt-top3-name">${ign}</span>
@@ -972,7 +1106,7 @@ async function fetchTestersPreview() {
         : `<span class="pt-tester-avatar-fallback">${initial}</span>`;
       const online = !!t.online;
       return `
-        <a class="pt-tester-chip" href="/testers" onclick="return goToView(event,'testers')">
+        <a class="pt-tester-chip" href="${viewPath('testers')}" onclick="return goToView(event,'testers')">
           ${avatar}
           <span class="pt-tester-name">${name}</span>
           <span class="pt-tester-role">${t.role || 'Tester'}</span>
@@ -1094,30 +1228,32 @@ document.getElementById('playerModal').addEventListener('click', e => {
 });
 
 const lbSearchInputEl = document.getElementById('lbSearchInput');
-lbSearchInputEl.addEventListener('input', e => {
-  const value = e.target.value;
-  clearTimeout(lbSearchDebounceTimer);
-  lbSearchDebounceTimer = setTimeout(() => {
-    lbSearchQuery = value;
-    renderLeaderboard(cachedPlayers);
-    renderGamemodeView(currentWeapon, cachedPlayers);
-  }, 200);
-});
+if (lbSearchInputEl) {
+  lbSearchInputEl.addEventListener('input', e => {
+    const value = e.target.value;
+    clearTimeout(lbSearchDebounceTimer);
+    lbSearchDebounceTimer = setTimeout(() => {
+      lbSearchQuery = value;
+      renderLeaderboard(cachedPlayers);
+      renderGamemodeView(currentWeapon, cachedPlayers);
+    }, 200);
+  });
 
-lbSearchInputEl.addEventListener('keydown', async e => {
-  if (e.key !== 'Enter') return;
-  const ign = e.target.value.trim();
-  if (!ign) return;
-  clearTimeout(lbSearchDebounceTimer);
-  lbSearchQuery = ign;
-  renderLeaderboard(cachedPlayers);
-  const idx = cachedPlayers.findIndex(p => (p?.ign || '').toLowerCase() === ign.toLowerCase());
-  if (idx !== -1) { openPlayerModal(encodeURIComponent(JSON.stringify({ ...cachedPlayers[idx], rank: idx + 1 }))); return; }
-  try {
-    const p = await apiFetch('/api/player/' + encodeURIComponent(ign));
-    openPlayerModal(encodeURIComponent(JSON.stringify(p)));
-  } catch(_) { showToast('Player "' + ign + '" not found', 'check'); }
-});
+  lbSearchInputEl.addEventListener('keydown', async e => {
+    if (e.key !== 'Enter') return;
+    const ign = e.target.value.trim();
+    if (!ign) return;
+    clearTimeout(lbSearchDebounceTimer);
+    lbSearchQuery = ign;
+    renderLeaderboard(cachedPlayers);
+    const idx = cachedPlayers.findIndex(p => (p?.ign || '').toLowerCase() === ign.toLowerCase());
+    if (idx !== -1) { openPlayerModal(encodeURIComponent(JSON.stringify({ ...cachedPlayers[idx], rank: idx + 1 }))); return; }
+    try {
+      const p = await apiFetch('/api/player/' + encodeURIComponent(ign));
+      openPlayerModal(encodeURIComponent(JSON.stringify(p)));
+    } catch(_) { showToast('Player "' + ign + '" not found', 'check'); }
+  });
+}
 
 const heroInput = document.getElementById('heroSearchInput');
 const heroBtn = document.getElementById('heroSearchBtn');
@@ -1235,15 +1371,19 @@ if (compareBtnEl) compareBtnEl.addEventListener('click', runCompare);
   if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') runCompare(); });
 });
 
+// ═══════════════════════════════════════════════════════════════
+//  REALTIME — Pusher (per-tenant channel)
+// ═══════════════════════════════════════════════════════════════
 function connectRealtime() {
   if (typeof Pusher === 'undefined') return;
   if (!PUSHER_KEY || PUSHER_KEY === 'YOUR_PUSHER_KEY') {
     console.warn('Pusher key not set — realtime disabled. Using polling fallback.');
     return;
   }
+  if (!SLUG) return;
   try {
     const pusher = new Pusher(PUSHER_KEY, { cluster: PUSHER_CLUSTER });
-    const channel = pusher.subscribe('eclipsetiers-updates');
+    const channel = pusher.subscribe(`tenant-${SLUG}-updates`);
 
     channel.bind('tier_updated', msg => {
       fetchLeaderboard(currentWeapon);
@@ -1256,6 +1396,13 @@ function connectRealtime() {
       fetchStats();
       showToast(`${msg.ign} — ${msg.weapon} tier removed`, 'remove');
     });
+    channel.bind('result_posted', msg => {
+      fetchLeaderboard(currentWeapon);
+      fetchStats();
+      fetchTestersPreview();
+      const prev = msg.previousTier ? `${msg.previousTier} → ` : '';
+      showToast(`${msg.ign} — ${msg.gamemode} ${prev}${msg.tier}`, 'trophy');
+    });
     channel.bind('player_registered', msg => {
       fetchStats();
       showToast(`${msg.player.ign} registered!`, 'check');
@@ -1267,26 +1414,35 @@ function connectRealtime() {
       fetchTestersPreview();
       if (getCurrentView() === 'testers') fetchTesters();
     });
+    channel.bind('tenant_updated', () => {
+      loadSiteConfig();
+    });
   } catch (err) {
     console.error('Pusher init failed:', err);
   }
 }
 
-initInfoPopover();
-renderHomeGamemodes();
-applyView();
-fetchStats();
-fetchLeaderboard('all');
-fetchTestersPreview();
-connectRealtime();
-
-setInterval(() => {
+// ═══════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════
+(async function init() {
+  initInfoPopover();
+  renderHomeGamemodes();
+  await loadSiteConfig();
+  applyView();
   fetchStats();
-  fetchLeaderboard(currentWeapon);
-}, 30000);
+  fetchLeaderboard('all');
+  fetchTestersPreview();
+  connectRealtime();
 
-const footerYearEl = document.getElementById('footerYear');
-if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+  setInterval(() => {
+    fetchStats();
+    fetchLeaderboard(currentWeapon);
+  }, 30000);
+
+  const footerYearEl = document.getElementById('footerYear');
+  if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+})();
 </script>
 </body>
 </html>
