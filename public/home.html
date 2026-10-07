@@ -28,6 +28,7 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:#0f0705;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;}
   .container{max-width:1360px;margin:0 auto;padding:0 28px 48px;position:relative;z-index:1;}
+  .hidden{display:none!important;}
 
   .pt-topbar{position:sticky;top:0;z-index:150;background:linear-gradient(180deg,rgba(15,18,25,.96),rgba(15,18,25,.86));backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 8px 28px rgba(0,0,0,.22);}
   .pt-topbar-inner{max-width:1360px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;}
@@ -311,8 +312,6 @@
   .pt-footer-col a{color:var(--muted);text-decoration:none;font-size:.92rem;}
   .pt-footer-bottom{max-width:1180px;margin:0 auto;border-top:1px solid var(--border-soft);padding:20px 0 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--dim);}
 
-  .hidden{display:none!important;}
-
   @media(max-width:1100px){
     .pt-topbar-inner{flex-wrap:wrap;}
     .pt-nav{order:3;flex:1 1 100%;}
@@ -350,7 +349,7 @@
       <a class="pt-nav-link" href="#" id="nav-testers">Testers</a>
       <a class="pt-nav-link" href="#" id="nav-rankings">Rankings</a>
       <a class="pt-nav-link" href="#" id="nav-compare">Compare</a>
-      <a class="pt-nav-link" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Discord</a>
+      <a class="pt-nav-link" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>Discord</a>
       <a class="pt-nav-link" href="#" id="nav-tiertagger">TierTagger</a>
     </nav>
     <div class="pt-actions">
@@ -358,7 +357,7 @@
         <input class="lb-search-input" id="lbSearchInput" type="text" placeholder="Search player..." maxlength="16">
       </div>
       <button class="pt-info-btn" id="infoToggle" type="button">Information</button>
-      <a class="pt-discord-btn" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">
+      <a class="pt-discord-btn" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>
         <svg viewBox="0 0 24 24"><path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.381-.447.875-.609 1.268a18.27 18.27 0 0 0-5.48 0 12.64 12.64 0 0 0-.617-1.268.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C1.453 9.045.876 13.58 1.155 18.057a.082.082 0 0 0 .031.055 19.9 19.9 0 0 0 6.03 3.03.078.078 0 0 0 .084-.027c.463-.63.875-1.296 1.226-1.995a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.293.074.074 0 0 1 .077-.01c3.928 1.792 8.18 1.792 12.062 0a.074.074 0 0 1 .078.01c.12.097.25.194.373.293a.077.077 0 0 1-.006.128 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.107c.36.698.772 1.364 1.225 1.994a.076.076 0 0 0 .084.027 19.88 19.88 0 0 0 6.03-3.03.077.077 0 0 0 .032-.054c.334-5.18-.553-9.675-2.36-13.661a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.335.955-2.43 2.157-2.43 1.21 0 2.174 1.095 2.157 2.43 0 1.334-.954 2.42-2.157 2.42zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.335.955-2.43 2.157-2.43 1.21 0 2.174 1.095 2.157 2.43 0 1.334-.946 2.42-2.157 2.42z"/></svg>
       </a>
     </div>
@@ -402,7 +401,7 @@
         <p class="hero-sub">Compete in ranked 1v1s. Get tested by top players.<br>Claim your spot on the global leaderboard.</p>
         <div class="hero-actions">
           <a class="hero-btn hero-btn-primary" href="#" id="heroRankingsBtn">View Rankings</a>
-          <a class="hero-btn hero-btn-secondary" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Join Discord</a>
+          <a class="hero-btn hero-btn-secondary" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>Join Discord</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><strong id="heroPlayersRanked">--</strong><span>Registrations</span></div>
@@ -454,7 +453,7 @@
         <h3>Join Our Discord</h3>
         <p>Live updates, tier discussions, and testing announcements.</p>
       </div>
-      <a class="home-discord-cta" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">
+      <a class="home-discord-cta" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>
         <svg viewBox="0 0 24 24"><path d="M19.54 4.74A18.18 18.18 0 0 0 15.2 3.4l-.21.4c1.57.38 2.3.92 2.3.92a14.38 14.38 0 0 0-4.72-1.48 15.22 15.22 0 0 0-3.7 0 14.43 14.43 0 0 0-4.72 1.48s.72-.54 2.3-.92l-.21-.4a18.18 18.18 0 0 0-4.34 1.34C.9 10.54.54 16.19.54 16.19s1.9 3.28 6.92 3.44l.88-1.22a10.29 10.29 0 0 1-2.69-1.26l.68-.52a9.1 9.1 0 0 0 7.37 0l.68.52a10.29 10.29 0 0 1-2.69 1.26l.88 1.22c5.02-.16 6.92-3.44 6.92-3.44s-.36-5.65-2.46-11.45ZM8.24 14.5c-.9 0-1.64-.84-1.64-1.87s.72-1.87 1.64-1.87c.91 0 1.66.84 1.64 1.87 0 1.03-.72 1.87-1.64 1.87Zm7.52 0c-.9 0-1.64-.84-1.64-1.87s.72-1.87 1.64-1.87c.91 0 1.66.84 1.64 1.87 0 1.03-.72 1.87-1.64 1.87Z"/></svg>
         Join Our Discord
       </a>
@@ -596,7 +595,7 @@
       <div class="pt-footer-col">
         <span class="pt-footer-col-title">Resources</span>
         <a href="#" id="foot-tiertagger">TierTagger</a>
-        <a href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener">Discord Server</a>
+        <a href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>Discord Server</a>
       </div>
     </div>
   </div>
@@ -620,19 +619,17 @@
 //  CONFIG
 // ═══════════════════════════════════════════════════════════════
 const API = window.location.origin;
-const PUSHER_KEY = 'YOUR_PUSHER_KEY';
-const PUSHER_CLUSTER = 'YOUR_PUSHER_CLUSTER';
+const PUSHER_KEY = '1c90d01cd48dcef7ed53';
+const PUSHER_CLUSTER = 'ap1';
 
-// Detect slug from URL path
+const DEFAULT_DISCORD_INVITE = 'Placeholder';
+
 function detectSlug() {
   const path = location.pathname.replace(/^\/+|\/+$/g, '');
-  // If the path is a known page name, there's no slug
   const knownPages = ['home', 'rankings', 'testers', 'compare', 'tiertagger', ''];
   if (knownPages.includes(path)) {
-    // fall back to query param ?slug=
     return new URLSearchParams(location.search).get('slug') || null;
   }
-  // Otherwise, the first path segment is the slug
   const parts = path.split('/');
   return parts[0] || null;
 }
@@ -646,7 +643,7 @@ let currentWeapon = 'all';
 let cachedPlayers = [];
 let lbSearchQuery = '';
 let lbSearchDebounceTimer = null;
-let siteConfig = { name: 'Quantum Tierlist', avatar_url: null, slug: null };
+let siteConfig = { name: 'Quantum Tierlist', avatar_url: null, discord_invite: null, slug: null };
 
 const TIER_COLOR = {
   HT1:'#FF6B00',LT1:'#FF9933',HT2:'#FFB800',LT2:'#FFD700',
@@ -717,11 +714,6 @@ function regionBadgeHTML(region) {
   return `<div class="region-badge${flag ? '' : ' muted'}">${flag || ''} ${pretty}</div>`;
 }
 
-function withSlug(path) {
-  if (!SLUG) return path + (path.includes('?') ? '&' : '?') + 'slug=';
-  return path + (path.includes('?') ? '&' : '?') + 'slug=' + encodeURIComponent(SLUG);
-}
-
 async function apiFetch(endpoint, extraParams = '') {
   const params = SLUG ? `slug=${encodeURIComponent(SLUG)}` : '';
   const separator = endpoint.includes('?') ? '&' : '?';
@@ -732,12 +724,11 @@ async function apiFetch(endpoint, extraParams = '') {
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  SITE CONFIG (name + logo per tenant)
+//  SITE CONFIG
 // ═══════════════════════════════════════════════════════════════
 async function loadSiteConfig() {
   if (!SLUG) {
-    // No slug → generic site
-    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null });
+    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null, discord_invite: null });
     return;
   }
   try {
@@ -745,22 +736,21 @@ async function loadSiteConfig() {
     siteConfig = cfg;
     applySiteConfig(cfg);
   } catch (err) {
-    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null });
+    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null, discord_invite: null });
   }
 }
 
 function applySiteConfig(cfg) {
   const name = cfg.name || 'Quantum Tierlist';
   const avatar = cfg.avatar_url;
+  const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
-  // Topbar brand text
   const words = name.split(' ');
   const firstWord = words[0] || 'Quantum';
   const restWords = words.slice(1).join(' ') || 'Tierlist';
   document.getElementById('brandNameA').textContent = firstWord;
   document.getElementById('brandNameB').textContent = restWords ? ' ' + restWords : '';
 
-  // Logo
   const logoEl = document.getElementById('brandLogo');
   if (avatar) {
     logoEl.src = avatar;
@@ -769,20 +759,20 @@ function applySiteConfig(cfg) {
     logoEl.classList.remove('show');
   }
 
-  // Footer
-  document.getElementById('footerName').textContent = name;
-  document.getElementById('footerBrandName').textContent = name;
+  const footerNameEl = document.getElementById('footerName');
+  const footerBrandEl = document.getElementById('footerBrandName');
+  if (footerNameEl) footerNameEl.textContent = name;
+  if (footerBrandEl) footerBrandEl.textContent = name;
 
-  // Title
   document.title = name;
 
-  // Hero
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) heroTitle.textContent = name;
+  document.querySelectorAll('[data-discord-link]').forEach(el => {
+    el.setAttribute('href', invite);
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  NAVIGATION (path-based routing with slug prefix)
+//  NAVIGATION
 // ═══════════════════════════════════════════════════════════════
 function viewPath(view) {
   const slugPrefix = SLUG ? `/${SLUG}` : '';
@@ -799,7 +789,6 @@ function viewPath(view) {
 function getCurrentView() {
   const path = location.pathname.replace(/\/+$/, '') || '/';
   const parts = path.split('/').filter(Boolean);
-  // If slug is set, the first part is the slug — view is the second part
   const viewPart = SLUG ? parts[1] : parts[0];
   if (viewPart === 'testers') return 'testers';
   if (viewPart === 'tiertagger') return 'tiertagger';
@@ -858,20 +847,26 @@ function applyView() {
 }
 
 function wireNav() {
-  document.getElementById('nav-home').addEventListener('click', e => goToView(e, 'home'));
-  document.getElementById('nav-testers').addEventListener('click', e => goToView(e, 'testers'));
-  document.getElementById('nav-rankings').addEventListener('click', e => goToView(e, 'rankings'));
-  document.getElementById('nav-compare').addEventListener('click', e => goToView(e, 'compare'));
-  document.getElementById('nav-tiertagger').addEventListener('click', e => goToView(e, 'tiertagger'));
-  document.getElementById('brandLink').addEventListener('click', e => goToView(e, 'home'));
-  document.getElementById('top3Link').addEventListener('click', e => goToView(e, 'rankings'));
-  document.getElementById('testersLink').addEventListener('click', e => goToView(e, 'testers'));
-  document.getElementById('heroRankingsBtn').addEventListener('click', e => goToView(e, 'rankings'));
-  document.getElementById('foot-home').addEventListener('click', e => goToView(e, 'home'));
-  document.getElementById('foot-rankings').addEventListener('click', e => goToView(e, 'rankings'));
-  document.getElementById('foot-compare').addEventListener('click', e => goToView(e, 'compare'));
-  document.getElementById('foot-testers').addEventListener('click', e => goToView(e, 'testers'));
-  document.getElementById('foot-tiertagger').addEventListener('click', e => goToView(e, 'tiertagger'));
+  const map = {
+    'nav-home': 'home',
+    'nav-testers': 'testers',
+    'nav-rankings': 'rankings',
+    'nav-compare': 'compare',
+    'nav-tiertagger': 'tiertagger',
+    'brandLink': 'home',
+    'top3Link': 'rankings',
+    'testersLink': 'testers',
+    'heroRankingsBtn': 'rankings',
+    'foot-home': 'home',
+    'foot-rankings': 'rankings',
+    'foot-compare': 'compare',
+    'foot-testers': 'testers',
+    'foot-tiertagger': 'tiertagger',
+  };
+  Object.entries(map).forEach(([id, view]) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', e => goToView(e, view));
+  });
 }
 
 window.addEventListener('popstate', applyView);
@@ -953,7 +948,7 @@ async function fetchLeaderboard(weapon = 'all') {
 
 const LB_VISIBLE_CAP = 100;
 
-function renderLeaderboard(players, highlightIgn = null) {
+function renderLeaderboard(players) {
   const tbody = document.getElementById('lbBody');
   if (!tbody) return;
   const list = Array.isArray(players) ? players : [];
@@ -1372,7 +1367,7 @@ if (compareBtnEl) compareBtnEl.addEventListener('click', runCompare);
 });
 
 // ═══════════════════════════════════════════════════════════════
-//  REALTIME — Pusher (per-tenant channel)
+//  REALTIME
 // ═══════════════════════════════════════════════════════════════
 function connectRealtime() {
   if (typeof Pusher === 'undefined') return;
