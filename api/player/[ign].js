@@ -1,18 +1,30 @@
-import { redis } from '../../lib/db';
+import { Redis } from '@upstash/redis';
+
+const redis = Redis.fromEnv();
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=120');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
+    const slug = String(req.query.slug || '').trim().toLowerCase();
     const ign = String(req.query.ign || '').trim();
+
+    if (!slug) return res.status(400).json({ error: 'Missing slug' });
     if (!ign) return res.status(400).json({ error: 'Missing IGN' });
 
-    const player = await redis.hgetall(`player:${ign}`);
+    const tenant = await redis.hgetall(`tenant:${slug}`);
+    if (!tenant || Object.keys(tenant).length === 0) {
+      return res.status(404).json({ error: 'Tenant not found', slug });
+    }
+    const gid = tenant.guild_id;
+
+    const player = await redis.hgetall(`g:${gid}:player:${ign}`);
 
     if (!player || Object.keys(player).length === 0) {
-      return res.status(404).json({ error: 'Player not found' });
+      return res.status(404).json({ error: 'Player not found', ign });
     }
 
     let tiers = {};
@@ -31,10 +43,10 @@ export default async function handler(req, res) {
       }
     }
 
-    // Compute global rank from the sorted set
-    const rankIndex = await redis.zrevrank('leaderboard:all', ign);
+    const rankIndex = await redis.zrevrank(`g:${gid}:leaderboard:all`, ign);
 
     res.status(200).json({
+      slug,
       ign: player.ign || ign,
       avatar: player.avatar || null,
       region: player.region || null,
