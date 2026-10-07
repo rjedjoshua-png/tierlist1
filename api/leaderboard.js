@@ -1,6 +1,7 @@
-import { redis } from '../lib/db.js';
+import { Redis } from '@upstash/redis';
 
-// Map the frontend's weapon label to the DB field name
+const redis = Redis.fromEnv();
+
 function weaponDataKey(weapon) {
   if (!weapon || weapon === 'all') return 'all';
   if (weapon === 'Diasmp') return 'DiaSMP';
@@ -11,24 +12,34 @@ function weaponDataKey(weapon) {
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Cache-Control', 'public, s-maxage=15, stale-while-revalidate=60');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const weapon = weaponDataKey(req.query.weapon || 'all');
-
-    // Sorted set of all registered players by total points (desc)
-    const playerIds = await redis.zrange('leaderboard:all', 0, -1, { rev: true });
-
-    if (!playerIds || playerIds.length === 0) {
-      return res.status(200).json({ players: [] });
+    const slug = String(req.query.slug || '').trim().toLowerCase();
+    if (!slug) {
+      return res.status(400).json({ error: 'Missing slug', players: [] });
     }
 
-    // Fetch each player's hash data in one pipelined round-trip
+    const tenant = await redis.hgetall(`tenant:${slug}`);
+    if (!tenant || Object.keys(tenant).length === 0) {
+      return res.status(404).json({ error: 'Tenant not found', slug, players: [] });
+    }
+    const gid = tenant.guild_id;
+
+    const weapon = weaponDataKey(req.query.weapon || 'all');
+    const key = `g:${gid}:leaderboard:${weapon}`;
+
+    const playerIds = await redis.zrange(key, 0, -1, { rev: true });
+
+    if (!playerIds || playerIds.length === 0) {
+      return res.status(200).json({ slug, players: [] });
+    }
+
     const pipeline = redis.pipeline();
-    playerIds.forEach((id) => pipeline.hgetall(`player:${id}`));
+    playerIds.forEach((id) => pipeline.hgetall(`g:${gid}:player:${id}`));
     const results = await pipeline.exec();
 
-    // Filter out empties + shape the response
     const players = results
       .map((raw, i) => {
         if (!raw || Object.keys(raw).length === 0) return null;
@@ -51,7 +62,7 @@ export default async function handler(req, res) {
       })
       .filter(Boolean);
 
-    res.status(200).json({ players });
+    res.status(200).json({ slug, players });
   } catch (err) {
     console.error('leaderboard error:', err);
     res.status(500).json({ error: 'Failed to load leaderboard', players: [] });
