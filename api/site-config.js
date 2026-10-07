@@ -12,7 +12,6 @@ export default async function handler(req, res) {
     const slug = String(req.query.slug || '').trim().toLowerCase();
 
     if (!slug) {
-      // Return the list of all tenants (used by an optional homepage dropdown)
       const keys = await redis.keys('tenant:*');
       if (!keys || keys.length === 0) {
         return res.status(200).json({ tenants: [] });
