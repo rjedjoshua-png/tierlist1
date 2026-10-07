@@ -1,29 +1,48 @@
-import { redis } from '../lib/db.js';
+import { Redis } from '@upstash/redis';
+
+const redis = Redis.fromEnv();
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=120');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    // Sorted set of tester IDs by monthly tests (desc)
-    const ids = await redis.zrange('testers:all', 0, -1, { rev: true });
+    const slug = String(req.query.slug || '').trim().toLowerCase();
+    if (!slug) {
+      return res.status(400).json({
+        error: 'Missing slug',
+        testers: [],
+        dashboard: { totalTestsThisMonth: 0, activeTesters: 0, onlineNow: 0, topContributor: null, topThree: [] }
+      });
+    }
+
+    const tenant = await redis.hgetall(`tenant:${slug}`);
+    if (!tenant || Object.keys(tenant).length === 0) {
+      return res.status(404).json({
+        error: 'Tenant not found', slug,
+        testers: [],
+        dashboard: { totalTestsThisMonth: 0, activeTesters: 0, onlineNow: 0, topContributor: null, topThree: [] }
+      });
+    }
+    const gid = tenant.guild_id;
+
+    const ids = await redis.zrange(`g:${gid}:testers:all`, 0, -1, { rev: true });
 
     if (!ids || ids.length === 0) {
       return res.status(200).json({
+        slug,
         testers: [],
         dashboard: {
-          totalTestsThisMonth: 0,
-          activeTesters: 0,
-          onlineNow: 0,
-          topContributor: null,
-          topThree: [],
+          totalTestsThisMonth: 0, activeTesters: 0,
+          onlineNow: 0, topContributor: null, topThree: [],
         },
       });
     }
 
     const pipeline = redis.pipeline();
-    ids.forEach((id) => pipeline.hgetall(`tester:${id}`));
+    ids.forEach((id) => pipeline.hgetall(`g:${gid}:tester:${id}`));
     const results = await pipeline.exec();
 
     const testers = results
@@ -48,6 +67,7 @@ export default async function handler(req, res) {
     const topContributor = testers[0] || null;
 
     res.status(200).json({
+      slug,
       testers,
       dashboard: {
         totalTestsThisMonth,
