@@ -12,6 +12,6 @@
     { "source": "/:slug/tiertagger", "destination": "/tiertagger.html" },
     { "source": "/:slug/compare", "destination": "/compare.html" },
     { "source": "/:slug", "destination": "/home.html" },
-    { "source": "/", "destination": "/home.html" }
+    { "source": "/", "destination": "/index.html" }
   ]
 }
