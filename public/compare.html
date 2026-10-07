@@ -601,7 +601,7 @@
   </div>
   <div class="pt-footer-bottom">
     <span>© <span id="footerYear">2026</span> <span id="footerBrandName">Quantum Tierlist</span>. All rights reserved.</span>
-    <span>Built by the community, for the community.</span>
+    <span>Created by <a href="https://discord.com/users/evantiisx" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700;">Evantiisx</a></span>
   </div>
 </footer>
 
@@ -615,14 +615,11 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════════════════
 const API = window.location.origin;
 const PUSHER_KEY = '1c90d01cd48dcef7ed53';
 const PUSHER_CLUSTER = 'ap1';
 
-const DEFAULT_DISCORD_INVITE = 'Placeholder';
+const DEFAULT_DISCORD_INVITE = 'https://discord.gg/ZRqHVHWfZY';
 
 function detectSlug() {
   const path = location.pathname.replace(/^\/+|\/+$/g, '');
@@ -636,9 +633,6 @@ function detectSlug() {
 
 const SLUG = detectSlug();
 
-// ═══════════════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════════════
 let currentWeapon = 'all';
 let cachedPlayers = [];
 let lbSearchQuery = '';
@@ -675,9 +669,6 @@ const RANK_TITLE_ICONS = {
   'Combat Specialist':'💎','Combat Cadet':'🛡️','Combat Novice':'⭐','Rookie':'•'
 };
 
-// ═══════════════════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════════════════
 function weaponDataKey(w) {
   if (!w || w === 'all') return 'all';
   if (w === 'Diasmp') return 'DiaSMP';
@@ -723,9 +714,6 @@ async function apiFetch(endpoint, extraParams = '') {
   return r.json();
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  SITE CONFIG
-// ═══════════════════════════════════════════════════════════════
 async function loadSiteConfig() {
   if (!SLUG) {
     applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null, discord_invite: null });
@@ -771,9 +759,6 @@ function applySiteConfig(cfg) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  NAVIGATION
-// ═══════════════════════════════════════════════════════════════
 function viewPath(view) {
   const slugPrefix = SLUG ? `/${SLUG}` : '';
   const mapping = {
@@ -875,9 +860,6 @@ window.addEventListener('DOMContentLoaded', () => {
   applyView();
 });
 
-// ═══════════════════════════════════════════════════════════════
-//  HOME GAMEMODES
-// ═══════════════════════════════════════════════════════════════
 function renderHomeGamemodes() {
   const host = document.getElementById('heroGamemodes');
   if (!host) return;
@@ -896,9 +878,6 @@ function pickWeapon(evt, weapon) {
   filterWeapon(weapon);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  STATS
-// ═══════════════════════════════════════════════════════════════
 async function fetchStats() {
   try {
     const d = await apiFetch('/api/stats');
@@ -930,9 +909,6 @@ function renderStats(d) {
   if (dl) dl.textContent = 'Not tracked';
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  LEADERBOARD
-// ═══════════════════════════════════════════════════════════════
 async function fetchLeaderboard(weapon = 'all') {
   try {
     const d = await apiFetch('/api/leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
@@ -1366,9 +1342,6 @@ if (compareBtnEl) compareBtnEl.addEventListener('click', runCompare);
   if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') runCompare(); });
 });
 
-// ═══════════════════════════════════════════════════════════════
-//  REALTIME
-// ═══════════════════════════════════════════════════════════════
 function connectRealtime() {
   if (typeof Pusher === 'undefined') return;
   if (!PUSHER_KEY || PUSHER_KEY === 'YOUR_PUSHER_KEY') {
@@ -1417,9 +1390,6 @@ function connectRealtime() {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════
 (async function init() {
   initInfoPopover();
   renderHomeGamemodes();
