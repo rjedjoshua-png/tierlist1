@@ -243,25 +243,6 @@
   .gm-player-meta{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--muted);margin-top:2px;}
   .gm-empty{color:var(--dim);font-family:'Share Tech Mono',monospace;font-size:.72rem;padding:14px 6px;text-align:center;}
 
-  .tiertagger-section{margin:18px auto;max-width:1180px;padding:22px;border-radius:26px;background:linear-gradient(180deg,rgba(14,17,24,.92),rgba(19,24,32,.92));border:1px solid rgba(0,200,100,.18);}
-  .tiertagger-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
-  .tiertagger-title{display:flex;align-items:center;gap:12px;}
-  .tiertagger-badge{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:rgba(0,200,100,.14);border:1px solid rgba(0,200,100,.22);}
-  .tiertagger-badge svg{width:24px;height:24px;color:#00c864;}
-  .tiertagger-head h2{margin:0;font-size:1.3rem;color:#f2f7fb;}
-  .tiertagger-head p{margin:4px 0 0;color:var(--muted);font-size:.92rem;}
-  .tiertagger-download{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;text-decoration:none;font-weight:800;color:#06130b;background:linear-gradient(180deg,#00e57a,#00c864);white-space:nowrap;}
-  .tiertagger-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px;}
-  .tiertagger-stat{padding:14px 15px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);}
-  .tiertagger-stat .label{font-size:.72rem;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-  .tiertagger-stat .value{font-size:1.15rem;font-weight:900;color:#eaf3fb;}
-  .tiertagger-readme{margin-top:14px;padding:18px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#d8e4ee;}
-  .tiertagger-readme h3{margin:0 0 10px;font-size:1.15rem;color:#f3f8fc;}
-  .tiertagger-readme p{margin:0 0 12px;color:#bfd0dd;line-height:1.65;}
-  .tiertagger-readme h4{margin:16px 0 10px;font-size:.95rem;text-transform:uppercase;color:#f3f8fc;}
-  .tiertagger-readme ul{margin:0 0 0 18px;padding:0;color:#bfd0dd;line-height:1.65;}
-  .tiertagger-readme li+li{margin-top:7px;}
-
   .compare-section{margin:18px auto;max-width:1180px;padding:24px;border-radius:26px;background:linear-gradient(180deg,rgba(14,17,24,.92),rgba(19,24,32,.92));border:1px solid rgba(0,200,100,.18);}
   .compare-picker{display:flex;align-items:center;justify-content:center;gap:18px;max-width:680px;margin:0 auto;flex-wrap:wrap;}
   .compare-picker-input{flex:1;min-width:200px;}
@@ -350,7 +331,6 @@
       <a class="pt-nav-link" href="#" id="nav-rankings">Rankings</a>
       <a class="pt-nav-link" href="#" id="nav-compare">Compare</a>
       <a class="pt-nav-link" href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>Discord</a>
-      <a class="pt-nav-link" href="#" id="nav-tiertagger">TierTagger</a>
     </nav>
     <div class="pt-actions">
       <div class="pt-search-wrap">
@@ -515,48 +495,6 @@
     </div>
   </div>
 
-  <section class="tiertagger-section hidden" id="tiertaggerSection">
-    <div class="tiertagger-head">
-      <div class="tiertagger-title">
-        <div class="tiertagger-badge">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 2.8 20.1 6.9V13c0 5.1-3.1 8.7-8.1 11.1C7 21.7 3.9 18.1 3.9 13V6.9L12 2.8Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M8.2 12.2 10.6 14.6 15.8 9.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <h2>TierTagger</h2>
-          <p>Client mod that shows Quantum Tierlist PvP tiers directly in player nametags.</p>
-        </div>
-      </div>
-      <a class="tiertagger-download" href="/EclipseTiers-TierTagger-1.3.0.jar" download>Download TierTagger</a>
-    </div>
-    <div class="tiertagger-grid">
-      <div class="tiertagger-stat"><div class="label">Live Downloads</div><div class="value" id="tierTaggerDownloadsValue">Loading...</div></div>
-      <div class="tiertagger-stat"><div class="label">Size</div><div class="value">1.28 MB</div></div>
-      <div class="tiertagger-stat"><div class="label">Version</div><div class="value">1.3.0</div></div>
-    </div>
-    <div class="tiertagger-readme">
-      <h3># Quantum TierTagger</h3>
-      <p><strong>Quantum TierTagger</strong> is a client-side Fabric mod that displays PvP tier rankings from Quantum Tierlist directly on player nametags.</p>
-      <h4>Features</h4>
-      <ul>
-        <li>🏷️ <strong>Live tier tags</strong> — See every player's PvP tier in real time</li>
-        <li>🎮 <strong>Multiple gamemodes</strong> — Sword, Axe, Crystal, Pot, SMP, UHC, NethPot, Mace, SpearMace, Cart</li>
-        <li>🔍 <strong>In-game search</strong> — Look up any player's tier</li>
-        <li>⌨️ <strong>Keybinds</strong> — Cycle gamemodes "G" or search "Y"</li>
-      </ul>
-      <h4>Requirements</h4>
-      <ul>
-        <li>Minecraft 1.21.1 – 1.21.11</li>
-        <li>Fabric Loader ≥ 0.16.0</li>
-        <li>Fabric API</li>
-        <li>ModMenu ≥ 11.0.3</li>
-        <li>Java 21+</li>
-      </ul>
-    </div>
-  </section>
-
   <section class="compare-section hidden" id="compareSection">
     <div style="text-align:center;margin-bottom:24px;">
       <h2 style="font-family:'Orbitron',sans-serif;">Compare Players</h2>
@@ -594,14 +532,13 @@
       </div>
       <div class="pt-footer-col">
         <span class="pt-footer-col-title">Resources</span>
-        <a href="#" id="foot-tiertagger">TierTagger</a>
         <a href="https://discord.gg/ZRqHVHWfZY" target="_blank" rel="noopener" data-discord-link>Discord Server</a>
       </div>
     </div>
   </div>
   <div class="pt-footer-bottom">
     <span>© <span id="footerYear">2026</span> <span id="footerBrandName">Quantum Tierlist</span>. All rights reserved.</span>
-    <span>Built by the community, for the community.</span>
+    <span>Created by <a href="https://discord.com/users/evantiisx" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700;">Evantiisx</a></span>
   </div>
 </footer>
 
@@ -615,18 +552,15 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════════════════
 const API = window.location.origin;
 const PUSHER_KEY = '1c90d01cd48dcef7ed53';
 const PUSHER_CLUSTER = 'ap1';
 
-const DEFAULT_DISCORD_INVITE = 'Placeholder';
+const DEFAULT_DISCORD_INVITE = 'https://discord.gg/ZRqHVHWfZY';
 
 function detectSlug() {
   const path = location.pathname.replace(/^\/+|\/+$/g, '');
-  const knownPages = ['home', 'rankings', 'testers', 'compare', 'tiertagger', ''];
+  const knownPages = ['home', 'rankings', 'testers', 'compare', ''];
   if (knownPages.includes(path)) {
     return new URLSearchParams(location.search).get('slug') || null;
   }
@@ -636,9 +570,6 @@ function detectSlug() {
 
 const SLUG = detectSlug();
 
-// ═══════════════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════════════
 let currentWeapon = 'all';
 let cachedPlayers = [];
 let lbSearchQuery = '';
@@ -675,9 +606,6 @@ const RANK_TITLE_ICONS = {
   'Combat Specialist':'💎','Combat Cadet':'🛡️','Combat Novice':'⭐','Rookie':'•'
 };
 
-// ═══════════════════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════════════════
 function weaponDataKey(w) {
   if (!w || w === 'all') return 'all';
   if (w === 'Diasmp') return 'DiaSMP';
@@ -723,9 +651,6 @@ async function apiFetch(endpoint, extraParams = '') {
   return r.json();
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  SITE CONFIG
-// ═══════════════════════════════════════════════════════════════
 async function loadSiteConfig() {
   if (!SLUG) {
     applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null, discord_invite: null });
@@ -771,16 +696,12 @@ function applySiteConfig(cfg) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  NAVIGATION
-// ═══════════════════════════════════════════════════════════════
 function viewPath(view) {
   const slugPrefix = SLUG ? `/${SLUG}` : '';
   const mapping = {
     home: slugPrefix || '/',
     testers: `${slugPrefix}/testers`,
     rankings: `${slugPrefix}/rankings`,
-    tiertagger: `${slugPrefix}/tiertagger`,
     compare: `${slugPrefix}/compare`,
   };
   return mapping[view] || (slugPrefix || '/');
@@ -791,7 +712,6 @@ function getCurrentView() {
   const parts = path.split('/').filter(Boolean);
   const viewPart = SLUG ? parts[1] : parts[0];
   if (viewPart === 'testers') return 'testers';
-  if (viewPart === 'tiertagger') return 'tiertagger';
   if (viewPart === 'rankings') return 'rankings';
   if (viewPart === 'compare') return 'compare';
   return 'home';
@@ -811,7 +731,6 @@ function applyView() {
 
   const home = document.getElementById('homeSection');
   const testers = document.getElementById('testersSection');
-  const tiertagger = document.getElementById('tiertaggerSection');
   const compare = document.getElementById('compareSection');
   const tabs = document.getElementById('gamemodeTabs');
   const gmPane = document.getElementById('gmDetailPane');
@@ -819,7 +738,6 @@ function applyView() {
 
   if (home) home.classList.add('hidden');
   if (testers) testers.classList.add('hidden');
-  if (tiertagger) tiertagger.classList.add('hidden');
   if (compare) compare.classList.add('hidden');
   if (tabs) tabs.classList.add('hidden');
   if (gmPane) gmPane.classList.add('hidden');
@@ -830,8 +748,6 @@ function applyView() {
   } else if (view === 'testers') {
     if (testers) testers.classList.remove('hidden');
     fetchTesters();
-  } else if (view === 'tiertagger') {
-    if (tiertagger) tiertagger.classList.remove('hidden');
   } else if (view === 'compare') {
     if (compare) compare.classList.remove('hidden');
   } else if (view === 'rankings') {
@@ -852,7 +768,6 @@ function wireNav() {
     'nav-testers': 'testers',
     'nav-rankings': 'rankings',
     'nav-compare': 'compare',
-    'nav-tiertagger': 'tiertagger',
     'brandLink': 'home',
     'top3Link': 'rankings',
     'testersLink': 'testers',
@@ -861,7 +776,6 @@ function wireNav() {
     'foot-rankings': 'rankings',
     'foot-compare': 'compare',
     'foot-testers': 'testers',
-    'foot-tiertagger': 'tiertagger',
   };
   Object.entries(map).forEach(([id, view]) => {
     const el = document.getElementById(id);
@@ -875,9 +789,6 @@ window.addEventListener('DOMContentLoaded', () => {
   applyView();
 });
 
-// ═══════════════════════════════════════════════════════════════
-//  HOME GAMEMODES
-// ═══════════════════════════════════════════════════════════════
 function renderHomeGamemodes() {
   const host = document.getElementById('heroGamemodes');
   if (!host) return;
@@ -896,9 +807,6 @@ function pickWeapon(evt, weapon) {
   filterWeapon(weapon);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  STATS
-// ═══════════════════════════════════════════════════════════════
 async function fetchStats() {
   try {
     const d = await apiFetch('/api/stats');
@@ -925,14 +833,8 @@ function renderStats(d) {
   if (hp) hp.textContent = totalPlayers;
   if (ht) ht.textContent = tieredPlayers;
   if (hq) hq.textContent = queuedNow;
-
-  const dl = document.getElementById('tierTaggerDownloadsValue');
-  if (dl) dl.textContent = 'Not tracked';
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  LEADERBOARD
-// ═══════════════════════════════════════════════════════════════
 async function fetchLeaderboard(weapon = 'all') {
   try {
     const d = await apiFetch('/api/leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
@@ -1366,9 +1268,6 @@ if (compareBtnEl) compareBtnEl.addEventListener('click', runCompare);
   if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') runCompare(); });
 });
 
-// ═══════════════════════════════════════════════════════════════
-//  REALTIME
-// ═══════════════════════════════════════════════════════════════
 function connectRealtime() {
   if (typeof Pusher === 'undefined') return;
   if (!PUSHER_KEY || PUSHER_KEY === 'YOUR_PUSHER_KEY') {
@@ -1417,9 +1316,6 @@ function connectRealtime() {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════
 (async function init() {
   initInfoPopover();
   renderHomeGamemodes();
