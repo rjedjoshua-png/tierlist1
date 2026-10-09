@@ -2,18 +2,17 @@ import { Redis } from '@upstash/redis';
 
 const redis = Redis.fromEnv();
 
-// Gamemode mapping: bot name → website data key → mod id
 const GM_MAP = {
-  'Sword':    { web: 'Sword',     mod: 'sword' },
-  'Axe':      { web: 'Axe',       mod: 'axe' },
-  'Mace':     { web: 'Mace',      mod: 'mace' },
-  'Crystal':  { web: 'Crystal',   mod: 'crystal' },
-  'Netherite':{ web: 'Netherite', mod: 'nethop' },
-  'UHC':      { web: 'UHC',       mod: 'uhc' },
-  'Pot':      { web: 'Pot',       mod: 'pot' },
-  'SMP':      { web: 'SMP',       mod: 'smp' },
-  'DiaSMP':   { web: 'DiaSMP',    mod: 'dia_smp' },
-  'Cart':     { web: 'Cart',      mod: 'cart' },
+  'Sword':     { web: 'Sword',     mod: 'sword' },
+  'Axe':       { web: 'Axe',       mod: 'axe' },
+  'Mace':      { web: 'Mace',      mod: 'mace' },
+  'Crystal':   { web: 'Crystal',   mod: 'crystal' },
+  'Netherite': { web: 'Netherite', mod: 'nethop' },
+  'UHC':       { web: 'UHC',       mod: 'uhc' },
+  'Pot':       { web: 'Pot',       mod: 'pot' },
+  'SMP':       { web: 'SMP',       mod: 'smp' },
+  'DiaSMP':    { web: 'DiaSMP',    mod: 'dia_smp' },
+  'Cart':      { web: 'Cart',      mod: 'cart' },
 };
 
 const TIER_POINTS = {
@@ -29,22 +28,34 @@ function parseTier(tierStr) {
   const cleaned = retired ? s.slice(1) : s;
   const m = cleaned.match(/^([HL])T([1-5])$/);
   if (!m) return null;
-  const pos = m[1] === 'H' ? 0 : 1; // 0 = high, 1 = low
+  const pos = m[1] === 'H' ? 0 : 1;
   const tier = parseInt(m[2], 10);
   return { tier, pos, retired };
 }
 
 async function lookupIgnFromUuid(uuid) {
-  // Try Mojang API to convert UUID -> username
   const cleanUuid = uuid.replace(/-/g, '');
+
+  // Try Mojang first (premium accounts)
   try {
     const r = await fetch(`https://sessionserver.mojang.com/session/minecraft/profile/${cleanUuid}`);
-    if (!r.ok) return null;
-    const data = await r.json();
-    return data.name || null;
+    if (r.ok) {
+      const data = await r.json();
+      if (data && data.name) return data.name;
+    }
   } catch (_) {
-    return null;
+    // fall through to Redis
   }
+
+  // Fallback: check our Redis mapping (cracked accounts)
+  try {
+    const stored = await redis.get(`uuid:${cleanUuid}`);
+    if (stored) return String(stored);
+  } catch (_) {
+    // ignore
+  }
+
+  return null;
 }
 
 async function computePoints(tiers) {
@@ -75,7 +86,7 @@ export default async function handler(req, res) {
     }
     const gid = String(tenant.guild_id);
 
-    // Convert UUID -> IGN (via Mojang)
+    // Convert UUID -> IGN (Mojang for premium, Redis for cracked)
     const ign = await lookupIgnFromUuid(uuid);
     if (!ign) {
       return res.status(404).json({ error: 'Could not resolve UUID to IGN', uuid });
@@ -98,7 +109,6 @@ export default async function handler(req, res) {
       const parsed = parseTier(tierStr);
       if (!parsed) continue;
 
-      // Find mod id from web name
       const entry = Object.values(GM_MAP).find(g => g.web.toLowerCase() === webName.toLowerCase());
       const modId = entry ? entry.mod : webName.toLowerCase();
 
@@ -114,7 +124,6 @@ export default async function handler(req, res) {
 
     const points = await computePoints(webTiers);
     const region = player.region ? String(player.region) : 'NA';
-    const overall = 0; // We'll fill this from the leaderboard below
 
     // Compute overall rank
     let overallRank = 0;
