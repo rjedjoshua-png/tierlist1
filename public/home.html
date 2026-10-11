@@ -323,7 +323,7 @@
   <div class="pt-topbar-inner">
     <a class="pt-brand" href="#" id="brandLink">
       <img class="pt-brand-logo" id="brandLogo" alt="Logo">
-      <span class="pt-brand-eclipse" id="brandNameA">Tier</span><span class="pt-brand-tiers" id="brandNameB">Hub</span>
+      <span class="pt-brand-eclipse" id="brandNameA">TierHub</span><span class="pt-brand-tiers" id="brandNameB"> Tierlist</span>
     </a>
     <nav class="pt-nav">
       <a class="pt-nav-link active" href="#" id="nav-home">Home</a>
@@ -519,7 +519,7 @@
 <footer class="pt-footer">
   <div class="pt-footer-inner">
     <div class="pt-footer-brand">
-      <span class="pt-footer-logo" id="footerName">TierHub</span>
+      <span class="pt-footer-logo" id="footerName">TierHub Tierlist</span>
       <p>A global Minecraft PvP tier list community. Get tested, get ranked, get respected.</p>
     </div>
     <div class="pt-footer-links">
@@ -537,7 +537,7 @@
     </div>
   </div>
   <div class="pt-footer-bottom">
-    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">TierHub</span>. All rights reserved.</span>
+    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">TierHub Tierlist</span>. All rights reserved.</span>
     <span>Created by <a href="https://discord.com/users/evantiisx" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700;">Evantiisx</a></span>
   </div>
 </footer>
@@ -670,11 +670,9 @@ function applySiteConfig(cfg) {
   const avatar = cfg.avatar_url;
   const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
-  const words = name.split(' ');
-  const firstWord = words[0] || 'Tier';
-  const restWords = words.slice(1).join(' ') || 'Hub';
+  const firstWord = name.split(' ')[0] || 'TierHub';
   document.getElementById('brandNameA').textContent = firstWord;
-  document.getElementById('brandNameB').textContent = restWords ? ' ' + restWords : '';
+  document.getElementById('brandNameB').textContent = ' Tierlist';
 
   const logoEl = document.getElementById('brandLogo');
   if (avatar) {
@@ -686,10 +684,11 @@ function applySiteConfig(cfg) {
 
   const footerNameEl = document.getElementById('footerName');
   const footerBrandEl = document.getElementById('footerBrandName');
-  if (footerNameEl) footerNameEl.textContent = name;
-  if (footerBrandEl) footerBrandEl.textContent = name;
+  const footerText = firstWord + ' Tierlist';
+  if (footerNameEl) footerNameEl.textContent = footerText;
+  if (footerBrandEl) footerBrandEl.textContent = footerText;
 
-  document.title = name;
+  document.title = footerText;
 
   document.querySelectorAll('[data-discord-link]').forEach(el => {
     el.setAttribute('href', invite);
