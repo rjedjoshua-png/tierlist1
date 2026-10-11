@@ -323,7 +323,7 @@
   <div class="pt-topbar-inner">
     <a class="pt-brand" href="#" id="brandLink">
       <img class="pt-brand-logo" id="brandLogo" alt="Logo">
-      <span class="pt-brand-eclipse" id="brandNameA">TierHub</span><span class="pt-brand-tiers" id="brandNameB"> Tierlist</span>
+      <span class="pt-brand-eclipse" id="brandNameA">TierHub</span><span class="pt-brand-tiers" id="brandNameB"></span>
     </a>
     <nav class="pt-nav">
       <a class="pt-nav-link active" href="#" id="nav-home">Home</a>
@@ -519,7 +519,7 @@
 <footer class="pt-footer">
   <div class="pt-footer-inner">
     <div class="pt-footer-brand">
-      <span class="pt-footer-logo" id="footerName">TierHub Tierlist</span>
+      <span class="pt-footer-logo" id="footerName">TierHub</span>
       <p>A global Minecraft PvP tier list community. Get tested, get ranked, get respected.</p>
     </div>
     <div class="pt-footer-links">
@@ -537,7 +537,7 @@
     </div>
   </div>
   <div class="pt-footer-bottom">
-    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">TierHub Tierlist</span>. All rights reserved.</span>
+    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">TierHub</span>. All rights reserved.</span>
     <span>Created by <a href="https://discord.com/users/evantiisx" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700;">Evantiisx</a></span>
   </div>
 </footer>
@@ -670,9 +670,8 @@ function applySiteConfig(cfg) {
   const avatar = cfg.avatar_url;
   const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
-  const firstWord = name.split(' ')[0] || 'TierHub';
-  document.getElementById('brandNameA').textContent = firstWord;
-  document.getElementById('brandNameB').textContent = ' Tierlist';
+  document.getElementById('brandNameA').textContent = name;
+  document.getElementById('brandNameB').textContent = '';
 
   const logoEl = document.getElementById('brandLogo');
   if (avatar) {
@@ -684,11 +683,10 @@ function applySiteConfig(cfg) {
 
   const footerNameEl = document.getElementById('footerName');
   const footerBrandEl = document.getElementById('footerBrandName');
-  const footerText = firstWord + ' Tierlist';
-  if (footerNameEl) footerNameEl.textContent = footerText;
-  if (footerBrandEl) footerBrandEl.textContent = footerText;
+  if (footerNameEl) footerNameEl.textContent = name;
+  if (footerBrandEl) footerBrandEl.textContent = name;
 
-  document.title = footerText;
+  document.title = name;
 
   document.querySelectorAll('[data-discord-link]').forEach(el => {
     el.setAttribute('href', invite);
