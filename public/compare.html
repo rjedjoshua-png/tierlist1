@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum Tierlist</title>
+<title>TierHub</title>
 <meta name="description" content="A global Minecraft PvP tier list community. Live leaderboards, player tiers and rankings for Sword, Axe, Pot, SMP, UHC, NethPot, SpearMace, Cart and more.">
 <meta name="theme-color" content="#00C864">
 <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
@@ -323,7 +323,7 @@
   <div class="pt-topbar-inner">
     <a class="pt-brand" href="#" id="brandLink">
       <img class="pt-brand-logo" id="brandLogo" alt="Logo">
-      <span class="pt-brand-eclipse" id="brandNameA">Quantum</span><span class="pt-brand-tiers" id="brandNameB"> Tierlist</span>
+      <span class="pt-brand-eclipse" id="brandNameA">Tier</span><span class="pt-brand-tiers" id="brandNameB">Hub</span>
     </a>
     <nav class="pt-nav">
       <a class="pt-nav-link active" href="#" id="nav-home">Home</a>
@@ -519,7 +519,7 @@
 <footer class="pt-footer">
   <div class="pt-footer-inner">
     <div class="pt-footer-brand">
-      <span class="pt-footer-logo" id="footerName">Quantum Tierlist</span>
+      <span class="pt-footer-logo" id="footerName">Tierhub</span>
       <p>A global Minecraft PvP tier list community. Get tested, get ranked, get respected.</p>
     </div>
     <div class="pt-footer-links">
@@ -537,7 +537,7 @@
     </div>
   </div>
   <div class="pt-footer-bottom">
-    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">Quantum Tierlist</span>. All rights reserved.</span>
+    <span>© <span id="footerYear">2026</span> <span id="footerBrandName">TierHub</span>. All rights reserved.</span>
     <span>Created by <a href="https://discord.com/users/evantiisx" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:700;">Evantiisx</a></span>
   </div>
 </footer>
@@ -574,7 +574,7 @@ let currentWeapon = 'all';
 let cachedPlayers = [];
 let lbSearchQuery = '';
 let lbSearchDebounceTimer = null;
-let siteConfig = { name: 'Quantum Tierlist', avatar_url: null, discord_invite: null, slug: null };
+let siteConfig = { name: 'TierHub', avatar_url: null, discord_invite: null, slug: null };
 
 const TIER_COLOR = {
   HT1:'#FF6B00',LT1:'#FF9933',HT2:'#FFB800',LT2:'#FFD700',
@@ -653,7 +653,7 @@ async function apiFetch(endpoint, extraParams = '') {
 
 async function loadSiteConfig() {
   if (!SLUG) {
-    applySiteConfig({ name: 'Quantum Tierlist', avatar_url: null, discord_invite: null });
+    applySiteConfig({ name: 'TierHub', avatar_url: null, discord_invite: null });
     return;
   }
   try {
@@ -666,7 +666,7 @@ async function loadSiteConfig() {
 }
 
 function applySiteConfig(cfg) {
-  const name = cfg.name || 'Quantum Tierlist';
+  const name = cfg.name || 'TierHub';
   const avatar = cfg.avatar_url;
   const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
