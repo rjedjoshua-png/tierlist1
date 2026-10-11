@@ -55,7 +55,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       slug: tenant.slug ? String(tenant.slug) : slug,
       guild_id: tenant.guild_id ? String(tenant.guild_id) : null,
-      name: tenant.name ? String(tenant.name) : 'Quantum Tierlist',
+      name: tenant.name ? String(tenant.name) : 'TierHub',
       avatar_url: tenant.avatar_url ? String(tenant.avatar_url) : null,
       discord_invite: tenant.discord_invite ? String(tenant.discord_invite) : null,
     });
