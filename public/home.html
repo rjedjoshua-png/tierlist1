@@ -670,9 +670,8 @@ function applySiteConfig(cfg) {
   const avatar = cfg.avatar_url;
   const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
-  const firstWord = name.split(' ')[0] || 'TierHub';
-  document.getElementById('brandNameA').textContent = firstWord;
-  document.getElementById('brandNameB').textContent = ' Tierlist';
+  document.getElementById('brandNameA').textContent = name;
+  document.getElementById('brandNameB').textContent = '';
 
   const logoEl = document.getElementById('brandLogo');
   if (avatar) {
@@ -684,11 +683,10 @@ function applySiteConfig(cfg) {
 
   const footerNameEl = document.getElementById('footerName');
   const footerBrandEl = document.getElementById('footerBrandName');
-  const footerText = firstWord + ' Tierlist';
-  if (footerNameEl) footerNameEl.textContent = footerText;
-  if (footerBrandEl) footerBrandEl.textContent = footerText;
+  if (footerNameEl) footerNameEl.textContent = name;
+  if (footerBrandEl) footerBrandEl.textContent = name;
 
-  document.title = footerText;
+  document.title = name;
 
   document.querySelectorAll('[data-discord-link]').forEach(el => {
     el.setAttribute('href', invite);
