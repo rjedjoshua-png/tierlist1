@@ -806,7 +806,7 @@ function pickWeapon(evt, weapon) {
 
 async function fetchStats() {
   try {
-    const d = await apiFetch('/api/stats');
+    const d = await apiFetch('/api/data?action=stats');
     renderStats(d);
   } catch(_) {}
 }
@@ -834,7 +834,7 @@ function renderStats(d) {
 
 async function fetchLeaderboard(weapon = 'all') {
   try {
-    const d = await apiFetch('/api/leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
+    const d = await apiFetch('/api/data?action=leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
     cachedPlayers = (d.players || []).map((p, i) => ({ ...p, rank: i + 1 }));
     renderLeaderboard(cachedPlayers);
     renderGamemodeView(currentWeapon, cachedPlayers);
