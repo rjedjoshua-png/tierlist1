@@ -670,8 +670,9 @@ function applySiteConfig(cfg) {
   const avatar = cfg.avatar_url;
   const invite = cfg.discord_invite || DEFAULT_DISCORD_INVITE;
 
-  document.getElementById('brandNameA').textContent = name;
-  document.getElementById('brandNameB').textContent = '';
+  const firstWord = name.split(' ')[0] || 'TierHub';
+  document.getElementById('brandNameA').textContent = firstWord;
+  document.getElementById('brandNameB').textContent = ' Tierlist';
 
   const logoEl = document.getElementById('brandLogo');
   if (avatar) {
@@ -683,10 +684,11 @@ function applySiteConfig(cfg) {
 
   const footerNameEl = document.getElementById('footerName');
   const footerBrandEl = document.getElementById('footerBrandName');
-  if (footerNameEl) footerNameEl.textContent = name;
-  if (footerBrandEl) footerBrandEl.textContent = name;
+  const footerText = firstWord + ' Tierlist';
+  if (footerNameEl) footerNameEl.textContent = footerText;
+  if (footerBrandEl) footerBrandEl.textContent = footerText;
 
-  document.title = name;
+  document.title = footerText;
 
   document.querySelectorAll('[data-discord-link]').forEach(el => {
     el.setAttribute('href', invite);
@@ -806,7 +808,7 @@ function pickWeapon(evt, weapon) {
 
 async function fetchStats() {
   try {
-    const d = await apiFetch('/api/stats');
+    const d = await apiFetch('/api/data?action=stats');
     renderStats(d);
   } catch(_) {}
 }
@@ -834,7 +836,7 @@ function renderStats(d) {
 
 async function fetchLeaderboard(weapon = 'all') {
   try {
-    const d = await apiFetch('/api/leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
+    const d = await apiFetch('/api/data?action=leaderboard', 'weapon=' + encodeURIComponent(weaponDataKey(weapon)));
     cachedPlayers = (d.players || []).map((p, i) => ({ ...p, rank: i + 1 }));
     renderLeaderboard(cachedPlayers);
     renderGamemodeView(currentWeapon, cachedPlayers);
